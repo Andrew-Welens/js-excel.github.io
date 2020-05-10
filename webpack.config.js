@@ -66,7 +66,6 @@ module.exports = {
     rules: [{
       test: /\.s[ac]ss$/i,
       use: [{
-        jsLoaders,
         loader: MiniCssExtractPlugin.loader,
         options: {
           hmr: isDev,
@@ -80,7 +79,7 @@ module.exports = {
     {
       test: /\.js$/,
       exclude: /node_modules/,
-      use: [],
+      use: jsLoaders(),
     }
     ],
   }
