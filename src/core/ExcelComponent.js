@@ -15,4 +15,8 @@ export class ExcelComponent extends DomLisneter {
   init() {
     this.initDOMListeners()
   }
+
+  destroy() {
+    this.removeDOMListeners()
+  }
 }
