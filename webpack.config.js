@@ -1,7 +1,6 @@
 const path = require('path')
-const {
-  CleanWebpackPlugin
-} = require('clean-webpack-plugin')
+const webpack = require('webpack')
+const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const HTMLWebpackPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
@@ -12,16 +11,12 @@ const isDev = !isProd
 const filename = ext => isDev ? `bundle.${ext}` : `bundle.[hash].${ext}`
 
 const jsLoaders = () => {
-  const loaders = [{
-    loader: 'babel-loader',
-    options: {
-      presets: ['@babel/preset-env']
-    }
-  }]
+  const loaders = ['babel-loader']
 
   if (isDev) {
     loaders.push('eslint-loader')
   }
+
   return loaders
 }
 
@@ -54,33 +49,40 @@ module.exports = {
         collapseWhitespace: isProd
       }
     }),
-    new CopyPlugin([{
-      from: path.resolve(__dirname, 'src/favicon.ico'),
-      to: path.resolve(__dirname, 'dist'),
-    }]),
+    new CopyPlugin([
+      {
+        from: path.resolve(__dirname, 'src/favicon.ico'),
+        to: path.resolve(__dirname, 'dist')
+      }
+    ]),
     new MiniCssExtractPlugin({
       filename: filename('css')
     }),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+    })
   ],
   module: {
-    rules: [{
-      test: /\.s[ac]ss$/i,
-      use: [{
-        loader: MiniCssExtractPlugin.loader,
-        options: {
-          hmr: isDev,
-          reloadAll: true
-        }
+    rules: [
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              hmr: isDev,
+              reloadAll: true
+            }
+          },
+          'css-loader',
+          'sass-loader'
+        ],
       },
-      'css-loader',
-      'sass-loader',
-      ],
-    },
-    {
-      test: /\.js$/,
-      exclude: /node_modules/,
-      use: jsLoaders(),
-    }
-    ],
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: jsLoaders()
+      }
+    ]
   }
 }
