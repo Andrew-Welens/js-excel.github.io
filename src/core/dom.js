@@ -23,7 +23,7 @@ class Dom {
   }
 
   off(eventType, callback) {
-    this.$el.removeEventLisneter(eventType, callback)
+    this.$el.removeEventListener(eventType, callback)
   }
 
   append(node) {
