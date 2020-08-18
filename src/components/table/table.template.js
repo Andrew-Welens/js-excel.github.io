@@ -13,20 +13,20 @@ function toColumn(element) {
   return `
     <div class="column">
      ${element}
-     <div class="col-resize"></div>
+     <div class="col-resize" data-resize="col"></div>
     </div>
 `
 }
 
 function generateRow(idx, data) {
-  const resize = idx ? '<div class="row-resize"></div>' : ''
+  const resize = idx ? '<div class="row-resize" data-resize="row"></div>' : ''
   return `
     <div class="row">
-    <div class="row-info">
-    ${idx ? idx : ''}
-    ${resize}
-    </div>
-    <div class="row-data">${data}</div>
+      <div class="row-info">
+      ${idx ? idx : ''}
+      ${resize}
+      </div>
+      <div class="row-data">${data}</div>
     </div>
 `
 }

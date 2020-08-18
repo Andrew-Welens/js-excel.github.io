@@ -5,10 +5,18 @@ export class Table extends ExcelComponent {
   static className = 'excel__table'
 
   constructor($root) {
-    super($root)
+    super($root, {
+      listeners: ['mousedown'],
+    })
   }
 
   toHtml() {
-    return generateTable(20)
+    return generateTable(30)
+  }
+
+  onMousedown(e) {
+    if (e.target.dataset.resize) {
+      console.log('resize')
+    }
   }
 }
