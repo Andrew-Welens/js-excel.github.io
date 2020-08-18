@@ -11,7 +11,7 @@ function toCell() {
 
 function toColumn(element) {
   return `
-    <div class="column">
+    <div class="column" data-type="resize">
      ${element}
      <div class="col-resize" data-resize="col"></div>
     </div>
