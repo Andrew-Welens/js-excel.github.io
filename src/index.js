@@ -1,4 +1,5 @@
 import './scss/index.scss'
+<<<<<<< HEAD
 import {Excel} from '@/components/excel/Excel'
 import {Header} from '@/components/header/Header'
 import {Toolbar} from '@/components/toolbar/Toolbar'
@@ -10,3 +11,5 @@ const excel = new Excel('#app', {
 })
 
 excel.render()
+=======
+>>>>>>> parent of f1987af... Merge pull request #4 from Andrew-Welens/framework
