@@ -6,7 +6,6 @@ export class ExcelComponent extends DomLisneter {
     this.name = options.name || ''
   }
 
-
   // Возвращает шаблон компонента
   toHtml() {
     return ''

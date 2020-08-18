@@ -15,12 +15,8 @@ const jsLoaders = () => {
   const loaders = [{
     loader: 'babel-loader',
     options: {
-<<<<<<< HEAD
       presets: ['@babel/preset-env'],
       plugins: ['@babel/plugin-proposal-class-properties']
-=======
-      presets: ['@babel/preset-env']
->>>>>>> parent of f1987af... Merge pull request #4 from Andrew-Welens/framework
     }
   }]
 
