@@ -5,22 +5,29 @@ const charCodes = {
 
 function toCell() {
   return `
-<div class="cell"></div>
+    <div class="cell" contenteditable></div>
 `
 }
 
 function toColumn(element) {
   return `
-<div class="column">${element}</div>
+    <div class="column">
+     ${element}
+     <div class="col-resize"></div>
+    </div>
 `
 }
 
 function generateRow(idx, data) {
+  const resize = idx ? '<div class="row-resize"></div>' : ''
   return `
-<div class="row">
-<div class="row-info">${idx}</div>
-<div class="row-data">${data}</div>
-</div>
+    <div class="row">
+    <div class="row-info">
+    ${idx ? idx : ''}
+    ${resize}
+    </div>
+    <div class="row-data">${data}</div>
+    </div>
 `
 }
 
@@ -37,7 +44,7 @@ export function generateTable(row = 15) {
       map(toColumn).
       join('')
 
-  rows.push(generateRow('', cols))
+  rows.push(generateRow(null, cols))
 
   for (let i = 0; i < row; i++) {
     const cells = new Array(colCount).fill('').map(toCell).join('')
