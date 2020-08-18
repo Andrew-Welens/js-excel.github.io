@@ -3,15 +3,15 @@ const charCodes = {
   Z: 90,
 }
 
-function toCell() {
+function toCell(_, col) {
   return `
-    <div class="cell" contenteditable></div>
+    <div class="cell" contenteditable data-col="${col}"></div>
 `
 }
 
-function toColumn(element) {
+function toColumn(element, idx) {
   return `
-    <div class="column" data-type="resize">
+    <div class="column" data-type="resize" data-col="${idx}">
      ${element}
      <div class="col-resize" data-resize="col"></div>
     </div>

@@ -21,10 +21,13 @@ export class Table extends ExcelComponent {
       const $parent = $target.closest('[data-type="resize"]')
       const coords = $parent.getCoords()
 
+      const cells = this.$root.queryAll(`[data-col="${$parent.data.col}"]`)
+
       document.onmousemove = event => {
         const delta = event.pageX - coords.right | 0
         const value = coords.width + delta
         $parent.$el.style.width = value + 'px'
+        cells.forEach(el => el.style.width = value + 'px')
       }
 
       document.onmouseup = () => {
