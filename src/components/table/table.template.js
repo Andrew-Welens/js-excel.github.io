@@ -21,7 +21,7 @@ function toColumn(element, idx) {
 function generateRow(idx, data) {
   const resize = idx ? '<div class="row-resize" data-resize="row"></div>' : ''
   return `
-    <div class="row">
+    <div class="row" data-type="resize">
       <div class="row-info">
       ${idx ? idx : ''}
       ${resize}
