@@ -29,12 +29,12 @@ export class Table extends ExcelComponent {
         if (type === 'col') {
           const delta = event.pageX - coords.right | 0
           const value = coords.width + delta
-          $parent.$el.style.width = value + 'px'
+          $parent.styleCss({width: value + 'px'})
           cells.forEach(el => el.style.width = value + 'px')
         } else {
           const delta = event.pageY - coords.bottom | 0
           const value = coords.height + delta
-          $parent.$el.style.height = value + 'px'
+          $parent.styleCss({height: value + 'px'})
         }
       }
 
