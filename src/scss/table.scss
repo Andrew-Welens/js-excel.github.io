@@ -74,9 +74,10 @@
     width: 4px;
     background-color: #3c74ff;
     opacity: 0;
+    z-index: 1000;
 
     &:hover {
-      opacity: 1;
+      opacity: 1 !important;
       cursor: col-resize;
     }
 
@@ -92,7 +93,7 @@
     opacity: 0;
 
     &:hover {
-      opacity: 1;
+      opacity: 1 !important;
       cursor: row-resize;
     }
   }
