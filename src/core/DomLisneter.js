@@ -14,7 +14,7 @@ export class DomLisneter {
       const method = getMethodName(listener)
       if (!this[method]) {
         const name = this.name || ''
-        throw new Error(`Method ${method} is not implemented in ${name} Component`
+        throw new Error(`Method ${method} is not implemented in ${name}`
         )
       }
       this[method] = this[method].bind(this)

@@ -6,7 +6,6 @@ export function resize($root, e) {
   const coords = $parent.getCoords()
   const type = $target.data.resize
   const line = type === 'col' ? 'bottom' : 'right'
-
   let value
 
 
@@ -17,11 +16,11 @@ export function resize($root, e) {
 
   document.onmousemove = event => {
     if (type === 'col') {
-      const delta = event.pageX - coords.right | 0
+      const delta = event.pageX - coords.right
       value = coords.width + delta
       $target.styleCss({right: -delta + 'px'})
     } else {
-      const delta = event.pageY - coords.bottom | 0
+      const delta = event.pageY - coords.bottom
       value = coords.height + delta
       $target.styleCss({bottom: -delta + 'px'})
     }
@@ -42,7 +41,7 @@ export function resize($root, e) {
 
     $target.styleCss({
       opacity: 0,
-      bottom: '-5000px',
+      bottom: 0,
       right: 0,
     })
   }
