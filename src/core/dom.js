@@ -50,6 +50,17 @@ class Dom {
     return this.$el.getBoundingClientRect()
   }
 
+  getId(parse) {
+    if (parse) {
+      const parsed = this.getId().split(':')
+      return {
+        row: +parsed[0],
+        col: +parsed[1],
+      }
+    }
+    return this.data.id
+  }
+
   get data() {
     return this.$el.dataset
   }
