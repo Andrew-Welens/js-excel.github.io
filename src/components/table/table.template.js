@@ -3,10 +3,21 @@ const charCodes = {
   Z: 90,
 }
 
-function toCell(_, col) {
-  return `
-    <div class="cell" contenteditable data-col="${col}"></div>
-`
+// function toCell(_, col) {
+//   return `
+//     <div class="cell" contenteditable data-col="${col}"></div>
+// `
+// }
+
+function toCell(row) {
+  return function(_, col) {
+    return `
+    <div class="cell"
+     contenteditable
+      data-col="${col}"
+      data-id="${row}:${col}">
+      </div>`
+  }
 }
 
 function toColumn(element, idx) {
@@ -47,7 +58,7 @@ export function generateTable(row = 15) {
   rows.push(generateRow(null, cols))
 
   for (let i = 0; i < row; i++) {
-    const cells = new Array(colCount).fill('').map(toCell).join('')
+    const cells = new Array(colCount).fill('').map(toCell(i)).join('')
     rows.push(generateRow(i + 1, cells))
   }
 
