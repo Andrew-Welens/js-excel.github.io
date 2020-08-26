@@ -7,8 +7,8 @@ export class Observer {
     if (!Array.isArray(this.listeners[e])) {
       return false
     }
-    this.listeners[e].forEach(lisneter => {
-      lisneter(args)
+    this.listeners[e].forEach(listener => {
+      listener(...args)
     })
     return true
   }
