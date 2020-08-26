@@ -50,6 +50,11 @@ class Dom {
     return this.$el.getBoundingClientRect()
   }
 
+  focus() {
+    this.$el.focus()
+    return this
+  }
+
   getId(parse) {
     if (parse) {
       const parsed = this.getId().split(':')

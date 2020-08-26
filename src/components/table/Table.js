@@ -1,7 +1,12 @@
 import {ExcelComponent} from '@core/ExcelComponent'
 import {generateTable} from '@/components/table/table.template'
 import {resize} from '@/components/table/table.resize'
-import {isCell, matrix, shouldResize} from '@/components/table/table.helpers'
+import {
+  isCell,
+  matrix,
+  nextSelector,
+  shouldResize,
+} from '@/components/table/table.helpers'
 import {TableSelection} from '@/components/table/TableSelection'
 import {$} from '@core/dom'
 
@@ -10,7 +15,7 @@ export class Table extends ExcelComponent {
 
   constructor($root) {
     super($root, {
-      listeners: ['mousedown'],
+      listeners: ['mousedown', 'keydown'],
     })
   }
 
@@ -40,6 +45,25 @@ export class Table extends ExcelComponent {
       } else {
         this.selection.select($target)
       }
+    }
+  }
+
+  onKeydown(e) {
+    const keys = [
+      'Enter',
+      'Tab',
+      'ArrowLeft',
+      'ArrowRight',
+      'ArrowDown',
+      'ArrowUp']
+
+    const {key} = e
+
+    if (keys.includes(key) && !e.shiftKey) {
+      e.preventDefault()
+      const id = this.selection.current.getId(true)
+      const $next = this.$root.find(nextSelector(key, id))
+      this.selection.select($next)
     }
   }
 }
