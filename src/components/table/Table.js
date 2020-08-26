@@ -13,9 +13,11 @@ import {$} from '@core/dom'
 export class Table extends ExcelComponent {
   static className = 'excel__table'
 
-  constructor($root) {
+  constructor($root, options) {
     super($root, {
+      name: 'Table',
       listeners: ['mousedown', 'keydown'],
+      ...options
     })
   }
 
