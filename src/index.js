@@ -8,7 +8,7 @@ import {createStore} from '@core/createStore'
 import {rootReducer} from '@/store/rootReducer'
 
 const store = createStore(rootReducer, {
-  tableTitle: 'Table init'
+  colState: {},
 })
 
 const excel = new Excel('#app', {
