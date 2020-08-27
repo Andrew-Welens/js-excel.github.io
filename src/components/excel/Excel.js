@@ -5,6 +5,7 @@ export class Excel {
   constructor(selector, options) {
     this.$el = $(selector)
     this.components = options.components || []
+    this.store = options.store
     this.observer = new Observer()
   }
 
@@ -13,6 +14,7 @@ export class Excel {
 
     const componentOptions = {
       observer: this.observer,
+      store: this.store
     }
 
     this.components = this.components.map(Component => {
