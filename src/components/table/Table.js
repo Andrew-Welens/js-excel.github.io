@@ -1,4 +1,5 @@
 import {ExcelComponent} from '@core/ExcelComponent'
+import {$} from '@core/dom'
 import {generateTable} from '@/components/table/table.template'
 import {resize} from '@/components/table/table.resize'
 import {
@@ -8,7 +9,7 @@ import {
   shouldResize,
 } from '@/components/table/table.helpers'
 import {TableSelection} from '@/components/table/TableSelection'
-import {$} from '@core/dom'
+import * as actions from '@/store/actions'
 
 export class Table extends ExcelComponent {
   static className = 'excel__table'
@@ -52,7 +53,7 @@ export class Table extends ExcelComponent {
   async resizeTable(e) {
     try {
       const data = await resize(this.$root, e)
-      this.$dispatch({type: 'TABLE_RESIZE', data})
+      this.$dispatch(actions.tableResize(data))
       console.log(data)
     } catch (e) {
       console.warn('Resize', e.message)

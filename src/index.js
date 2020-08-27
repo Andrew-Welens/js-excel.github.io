@@ -6,9 +6,12 @@ import {Formula} from '@/components/formula/Formula'
 import {Table} from '@/components/table/Table'
 import {createStore} from '@core/createStore'
 import {rootReducer} from '@/store/rootReducer'
+import {locStorage} from '@core/utils'
 
-const store = createStore(rootReducer, {
-  colState: {},
+const store = createStore(rootReducer, locStorage('excel-state'))
+
+store.subscribe(state => {
+  locStorage('excel-state', state)
 })
 
 const excel = new Excel('#app', {
