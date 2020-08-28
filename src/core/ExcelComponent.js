@@ -5,9 +5,9 @@ export class ExcelComponent extends DomLisneter {
     super($root, options.listeners)
     this.name = options.name || ''
     this.observer = options.observer
+    this.subscribe = options.subscribe || []
     this.store = options.store
     this.unsubscribers = []
-    this.storeSub = null
 
     this.prepare()
   }
@@ -32,8 +32,11 @@ export class ExcelComponent extends DomLisneter {
     this.store.dispatch(action)
   }
 
-  $subscribe(fn) {
-    this.storeSub = this.store.subscribe(fn)
+  storeChanged() {
+  }
+
+  isWatching(key) {
+    return this.subscribe.includes(key)
   }
 
   init() {
@@ -43,6 +46,5 @@ export class ExcelComponent extends DomLisneter {
   destroy() {
     this.removeDOMListeners()
     this.unsubscribers.forEach(unsub => unsub())
-    this.storeSub.unsubscribe()
   }
 }

@@ -41,9 +41,6 @@ export class Table extends ExcelComponent {
     this.$on('formula:done', () => {
       this.selection.current.focus()
     })
-
-    this.$subscribe(state => {
-    })
   }
 
   selectCell($cell) {
@@ -55,7 +52,6 @@ export class Table extends ExcelComponent {
     try {
       const data = await resize(this.$root, e)
       this.$dispatch(actions.tableResize(data))
-      console.log(data)
     } catch (e) {
       console.warn('Resize', e.message)
     }
