@@ -7,8 +7,9 @@ import {Table} from '@/components/table/Table'
 import {createStore} from '@core/createStore'
 import {rootReducer} from '@/store/rootReducer'
 import {locStorage} from '@core/utils'
+import {initialState} from '@/store/initialState'
 
-const store = createStore(rootReducer, locStorage('excel-state'))
+const store = createStore(rootReducer, initialState)
 
 store.subscribe(state => {
   locStorage('excel-state', state)

@@ -4,14 +4,19 @@ const charCodes = {
 }
 
 const DEFAULT_WIDTH = 120
+const DEFAULT_HEIGHT = 24
 
 function getWidth(state, idx) {
-  return (state ? state[idx] : DEFAULT_WIDTH) + 'px'
+  return (state[idx] || DEFAULT_WIDTH) + 'px'
+}
+
+function getHeight(state, idx) {
+  return (state[idx] || DEFAULT_HEIGHT) + 'px'
 }
 
 function toCell(state, row) {
   return function(_, col) {
-    const width = getWidth(state.colState, col)
+    const width = getWidth(state, col)
     return `
     <div class="cell"
      contenteditable
@@ -35,10 +40,15 @@ function toColumn({col, idx, width}) {
 `
 }
 
-function generateRow(idx, data) {
+function generateRow(idx, data, state) {
   const resize = idx ? '<div class="row-resize" data-resize="row"></div>' : ''
+  const height = getHeight(state, idx)
   return `
-    <div class="row" data-type="resize">
+    <div class="row"
+     data-type="resize"
+     data-row="${idx}"
+     style="height: ${height}"
+     >
       <div class="row-info">
       ${idx ? idx : ''}
       ${resize}
@@ -70,11 +80,13 @@ export function generateTable(row = 15, state = {}) {
       map(toColumn).
       join('')
 
-  rows.push(generateRow(null, cols))
+  rows.push(generateRow(null, cols, {}))
 
   for (let i = 0; i < row; i++) {
-    const cells = new Array(colCount).fill('').map(toCell(state, i)).join('')
-    rows.push(generateRow(i + 1, cells))
+    const cells = new Array(colCount).fill('').
+        map(toCell(state.colState, i)).
+        join('')
+    rows.push(generateRow(i + 1, cells, state.rowState))
   }
 
   return rows.join('')
