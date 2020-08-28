@@ -23,7 +23,7 @@ export class Table extends ExcelComponent {
   }
 
   toHtml() {
-    return generateTable(20, this.store.getState() )
+    return generateTable(20, this.store.getState())
   }
 
   prepare() {
@@ -35,6 +35,7 @@ export class Table extends ExcelComponent {
     this.selectCell(this.$root.find('[data-id="0:0"]'))
     this.$on('formula:input', text => {
       this.selection.current.text(text)
+      this.textInStore(text)
     })
 
     this.$on('formula:done', () => {
@@ -94,8 +95,15 @@ export class Table extends ExcelComponent {
     }
   }
 
+  textInStore(value) {
+    this.$dispatch(actions.changeText({
+      id: this.selection.current.getId(),
+      value
+    }))
+  }
+
   onInput(e) {
-    this.$emit('table:input', $(e.target))
+    this.textInStore($(e.target).text())
   }
 }
 
