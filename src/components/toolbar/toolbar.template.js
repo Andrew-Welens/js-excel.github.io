@@ -12,7 +12,8 @@ function toBtn(btn) {
 `
 }
 
-export function generateToolbar() {
+export function generateToolbar(state) {
+  console.log(state)
   const buttons = [
     {
       icon: 'format_align_left',
@@ -31,8 +32,8 @@ export function generateToolbar() {
     },
     {
       icon: 'format_bold',
-      active: false,
-      value: {fontWeight: 'bold'}
+      active: state['fontWeight'] === 'bold',
+      value: {fontWeight: state['fontWeight'] === 'bold' ? 'normal': 'bold'}
     },
     {
       icon: 'format_italic',
