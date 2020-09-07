@@ -13,37 +13,48 @@ function toBtn(btn) {
 }
 
 export function generateToolbar(state) {
-  console.log(state)
   const buttons = [
     {
+      value: {textAlign: 'left'},
       icon: 'format_align_left',
-      active: false,
-      value: {textAlign: 'left'}
+      active: state['textAlign'] === 'left',
     },
     {
+      value: {textAlign: 'center'},
       icon: 'format_align_center',
-      active: false,
-      value: {textAlign: 'center'}
+      active: state['textAlign'] === 'center',
     },
     {
+      value: {textAlign: 'right'},
       icon: 'format_align_right',
-      active: false,
-      value: {textAlign: 'right'}
+      active: state['textAlign'] === 'right',
     },
     {
+      value: {
+        fontWeight: state['fontWeight'] === 'bold' ?
+            'normal' :
+            'bold'
+      },
       icon: 'format_bold',
       active: state['fontWeight'] === 'bold',
-      value: {fontWeight: state['fontWeight'] === 'bold' ? 'normal': 'bold'}
     },
     {
+      value: {
+        fontStyle: state['fontStyle'] === 'italic' ?
+            'normal' :
+            'italic'
+      },
       icon: 'format_italic',
-      active: false,
-      value: {fontStyle: 'italic'}
+      active: state['fontStyle'] === 'italic',
     },
     {
+      value: {
+        textDecoration: state['textDecoration'] === 'underline' ?
+            'none' :
+            'underline'
+      },
       icon: 'format_underlined',
-      active: false,
-      value: {textDecoration: 'underline'}
+      active: state['textDecoration'] === 'underline'
     },
   ]
   return buttons.map(toBtn).join('')

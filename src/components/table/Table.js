@@ -33,6 +33,7 @@ export class Table extends ExcelComponent {
   init() {
     super.init()
     this.selectCell(this.$root.find('[data-id="0:0"]'))
+
     this.$on('formula:input', text => {
       this.selection.current.text(text)
       this.textInStore(text)
@@ -40,6 +41,10 @@ export class Table extends ExcelComponent {
 
     this.$on('formula:done', () => {
       this.selection.current.focus()
+    })
+
+    this.$on('toolbar:style', style => {
+      this.selection.applyStyle(style)
     })
   }
 
