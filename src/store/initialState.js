@@ -1,7 +1,8 @@
 import {locStorage} from '@core/utils'
-import {defaultStyles} from '@/const'
+import {defaultStyles, defaultTitle} from '@/const'
 
 const defaultState = {
+  title: defaultTitle,
   stylesState: {},
   rowState: {},
   colState: {},
