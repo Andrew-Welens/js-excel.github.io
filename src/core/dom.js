@@ -18,7 +18,7 @@ class Dom {
       this.$el.textContent = text
       return this
     }
-    if (this.$el.tagName.toUpperCase() === 'input') {
+    if (this.$el.tagName.toLowerCase() === 'input') {
       return this.$el.value.trim()
     }
     return this.$el.textContent.trim()
@@ -79,6 +79,13 @@ class Dom {
 
   get data() {
     return this.$el.dataset
+  }
+
+  getStyles(styles = []) {
+    return styles.reduce((res, style) => {
+      res[style] = this.$el.style[style]
+      return res
+    }, {})
   }
 
   queryAll(selector) {
